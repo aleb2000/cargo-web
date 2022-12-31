@@ -105,14 +105,14 @@ pub fn download_package( package: &PrebuiltPackage ) -> PathBuf {
         };
 
         let slice = &buffer[ 0..length ];
-        hasher.input( slice );
+        hasher.update( slice );
         fp.write_all( slice ).unwrap();
         pb.add( length as u64 );
     }
 
     pb.finish();
 
-    let actual_hash = hasher.result();
+    let actual_hash = hasher.finalize();
     let actual_hash = actual_hash.map( |byte| format!( "{:02x}", byte ) ).join( "" );
 
     if actual_hash != package.hash {

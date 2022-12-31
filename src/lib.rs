@@ -20,7 +20,7 @@ extern crate notify;
 extern crate pbr;
 extern crate reqwest;
 extern crate serde;
-extern crate sha1;
+extern crate sha1_smol as sha1;
 extern crate sha2;
 extern crate tar;
 extern crate tempfile;
