@@ -529,11 +529,12 @@ impl Project {
             // https://github.com/rust-lang/rust/issues/30947
             let emmaken_cflags: Vec< _ > = extra_emmaken_cflags.into_iter().map( |flag| format!( "\"{}\"", flag ) ).collect();
             let mut emmaken_cflags = emmaken_cflags.join( " " );
-            if let Ok( user_emmaken_cflags ) = env::var( "EMMAKEN_CFLAGS" ) {
+            // aleb: changed EMMAKEN_CFLAGS to EMCC_CFLAGS
+            if let Ok( user_emmaken_cflags ) = env::var( "EMCC_CFLAGS" ) {
                 emmaken_cflags = format!( "{} {}", emmaken_cflags, user_emmaken_cflags );
             }
 
-            extra_environment.push( ("EMMAKEN_CFLAGS".to_owned(), emmaken_cflags) );
+            extra_environment.push( ("EMCC_CFLAGS".to_owned(), emmaken_cflags) );
         }
 
         if !vanilla_emscripten_build {
